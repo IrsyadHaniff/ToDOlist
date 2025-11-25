@@ -114,21 +114,24 @@
             <table class="w-full">
                 <thead class="bg-linear-to-bl from-violet-500 to-fuchsia-500 text-white">
                     <tr>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Tanggal</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Matakuliah</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Tugas</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Deskripsi</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Jenis</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Deadline</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Sudah Selesai?</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">Tanggal</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">Matakuliah</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">Tugas</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">Deskripsi</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">Jenis</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">Deadline</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">Sudah Selesai?</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                     @forelse($tugas as $item)
                         @php
-                            $isOverdue =
-                                \Carbon\Carbon::parse($item->deadline)->isPast() && $item->status !== 'Selesai';
+                            $deadline = \Carbon\Carbon::parse($item->deadline);
+                            $today = \Carbon\Carbon::today();
+                            $isOverdue = $deadline->isPast() && $item->status !== 'Selesai';
+                            $isToday = $deadline->isToday() && $item->status !== 'Selesai';
+                            $isUpcoming = $deadline->isTomorrow() && $item->status !== 'Selesai';
                         @endphp
                         <tr
                             class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 {{ $isOverdue ? 'bg-red-50 dark:bg-red-900/20' : '' }}">
@@ -176,9 +179,22 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-200">
-                                <div class="flex items-center gap-2">
+                                <div class="flex flex-col items-center gap-1">
                                     {{ $item->deadline_format }}
-                                    @if ($isOverdue)
+                                    {{-- jika tanggal <= deadline, bentarlagi --}}
+                                    @if ($isUpcoming)
+                                        <span
+                                            class="px-2 py-1 text-xs font-bold bg-orange-600 text-white rounded-full animate-pulse">
+                                            SEBENTAR LAGI!
+                                        </span>
+                                        {{-- jika tanggal == deadline, udhkirimtugas? --}}
+                                    @elseif($isToday)
+                                        <span
+                                            class="px-2 py-1 text-xs font-bold bg-yellow-600 text-white rounded-full animate-pulse w-fit">
+                                            UDAH KIRIM BELOM?
+                                        </span>
+                                        {{-- jika tanggal < deadline, terlambat --}}
+                                    @elseif($isOverdue)
                                         <span
                                             class="px-2 py-1 text-xs font-bold bg-red-600 text-white rounded-full animate-pulse">
                                             TERLAMBAT!
