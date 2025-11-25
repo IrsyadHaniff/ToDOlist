@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'ToDOlist - listTugas')
+@section('title', 'ToDOlist - List Tugas')
 
 @section('content')
     <div class="header dark:text-gray-200 mb-6">
