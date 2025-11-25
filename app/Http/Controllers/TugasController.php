@@ -145,4 +145,37 @@ class TugasController extends Controller
         return redirect()->route('listTugas.index')
             ->with('success', 'Tugas berhasil dihapus!');
     }
+
+    // Method untuk halaman Tugas Selesai
+    public function tugasSelesai(Request $request)
+    {
+        $query = Tugas::where('status', 'Selesai');
+
+        // Filter berdasarkan Jenis (opsional)
+        if ($request->filled('jenis')) {
+            $query->where('jenis', $request->jenis);
+        }
+
+        // Sorting
+        $sort = $request->get('sort', 'deadline_desc');
+
+        switch ($sort) {
+            case 'deadline_asc':
+                $query->orderBy('deadline', 'asc');
+                break;
+            case 'tanggal_asc':
+                $query->orderBy('tanggal', 'asc');
+                break;
+            case 'tanggal_desc':
+                $query->orderBy('tanggal', 'desc');
+                break;
+            default: // deadline_desc
+                $query->orderBy('deadline', 'desc');
+                break;
+        }
+
+        $tugas = $query->get();
+
+        return view('tugasSelesai.index', compact('tugas'));
+    }
 }
