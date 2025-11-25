@@ -13,14 +13,15 @@ class TugasController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Tugas::query();
+        // Query tugas yang BELUM selesai 
+        $query = Tugas::where('status', '!=', 'Selesai');
 
         // Filter berdasarkan Jenis
         if ($request->filled('jenis')) {
             $query->where('jenis', $request->jenis);
         }
 
-        // Filter berdasarkan Status
+        // Filter berdasarkan Status (Belum Mulai & Berlangsung)
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
