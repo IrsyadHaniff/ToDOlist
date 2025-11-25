@@ -65,9 +65,9 @@
             </li>
 
             <li>
-                <a href=""
+                <a href="{{ route('tugasSelesai') }}"
                     class="flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
-                            {{ Request::routeIs('tugas-selesai') ? 'bg-blue-500 text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700' }}">
+                            {{ Request::routeIs('tugasSelesai') ? 'bg-linear-to-bl from-violet-500 to-fuchsia-500 text-white' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
