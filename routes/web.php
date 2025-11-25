@@ -12,7 +12,7 @@ use App\Http\Controllers\TugasController;
 // Halaman landing/welcome
 Route::get('/', function () {
     return view('index');
-})->name('landing');
+})->name('landingPage');
 
 // Redirect /app ke beranda
 Route::get('/app', function () {
@@ -34,9 +34,8 @@ Route::get('/beranda', [TugasController::class, 'beranda'])->name('beranda');
 |--------------------------------------------------------------------------
 */
 
-// Halaman tugas yang sudah selesai (custom route - HARUS DI ATAS resource!)
+// Halaman tugas yang sudah selesai
 Route::get('/tugasSelesai', [TugasController::class, 'tugasSelesai'])->name('tugasSelesai');
 
 // Resource route untuk CRUD tugas
-// PENTING: Ini akan generate route dengan parameter {tugas}
 Route::resource('tugas', TugasController::class);
