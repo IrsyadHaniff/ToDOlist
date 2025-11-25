@@ -18,3 +18,5 @@ Route::get('/beranda', function () {
 Route::get('/listTugas', [TugasController::class, 'index'])->name('listTugas');
 Route::patch('/tugas/{tugas}', [TugasController::class, 'update'])->name('tugas.update');
 Route::resource('tugas', TugasController::class);
+
+Route::get('/tugasSelesai', [TugasController::class, 'tugasSelesai'])->name('tugasSelesai');
