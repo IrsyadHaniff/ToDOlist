@@ -11,14 +11,7 @@
     <!-- Action Buttons -->
     <div class="action-buttons mb-6 flex flex-wrap gap-3 items-center justify-between">
         <div class="flex flex-wrap gap-3">
-            <a href="{{ route('listTugas') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                </svg>
-                Kembali ke List Tugas
-            </a>
-            
-            <button class="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 flex items-center gap-2">
+            <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-all duration-200 transform hover:scale-105 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -71,7 +64,7 @@
     <div class="tables-container bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full">
-                <thead class="bg-gradient-to-r from-green-600 to-green-700 text-white">
+                <thead class="bg-linear-to-bl from-violet-500 to-fuchsia-500 text-white">
                     <tr>
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Tanggal</th>
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Matakuliah</th>
@@ -79,7 +72,7 @@
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Deskripsi</th>
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Jenis</th>
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Deadline</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Status</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -133,19 +126,6 @@
                                 <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
                                     ✅ Selesai
                                 </span>
-                                <!-- Tombol untuk kembalikan ke status lain jika perlu -->
-                                <form action="{{ route('tugas.update', $item->id) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="status" value="Berlangsung">
-                                    <button type="submit" 
-                                            class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-                                            title="Kembalikan ke Berlangsung">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </form>
                             </div>
                         </td>
                     </tr>

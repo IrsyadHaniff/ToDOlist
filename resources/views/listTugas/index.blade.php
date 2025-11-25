@@ -33,7 +33,7 @@
         </div>
 
         <!-- Filter & Sort Form -->
-        <form method="GET" action="{{ route('listTugas') }}" class="flex flex-wrap gap-3 items-center">
+        <form method="GET" action="{{ route('tugas.index') }}" class="flex flex-wrap gap-3 items-center">
             <!-- Filter Jenis -->
             <div class="relative">
                 <select name="jenis" onchange="this.form.submit()"
@@ -96,7 +96,7 @@
 
             <!-- Reset Button -->
             @if (request('jenis') || request('status') || request('sort'))
-                <a href="{{ route('listTugas') }}"
+                <a href="{{ route('tugas.index') }}"
                     class="px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all font-medium flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"

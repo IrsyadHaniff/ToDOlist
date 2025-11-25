@@ -3,20 +3,40 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TugasController;
 
+/*
+|--------------------------------------------------------------------------
+| Landing & Redirect Routes
+|--------------------------------------------------------------------------
+*/
 
+// Halaman landing/welcome
 Route::get('/', function () {
     return view('index');
-});
+})->name('landing');
+
+// Redirect /app ke beranda
 Route::get('/app', function () {
     return redirect()->route('beranda');
 })->name('app');
 
-Route::get('/beranda', function () {
-    return view('beranda.index');
-})->name('beranda');
+/*
+|--------------------------------------------------------------------------
+| Dashboard Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/listTugas', [TugasController::class, 'index'])->name('listTugas');
-Route::patch('/tugas/{tugas}', [TugasController::class, 'update'])->name('tugas.update');
-Route::resource('tugas', TugasController::class);
+// Halaman beranda/dashboard
+Route::get('/beranda', [TugasController::class, 'beranda'])->name('beranda');
 
+/*
+|--------------------------------------------------------------------------
+| Tugas Routes
+|--------------------------------------------------------------------------
+*/
+
+// Halaman tugas yang sudah selesai (custom route - HARUS DI ATAS resource!)
 Route::get('/tugasSelesai', [TugasController::class, 'tugasSelesai'])->name('tugasSelesai');
+
+// Resource route untuk CRUD tugas
+// PENTING: Ini akan generate route dengan parameter {tugas}
+Route::resource('tugas', TugasController::class);
