@@ -112,7 +112,7 @@
 
                 <!-- Action Buttons -->
                 <div class="flex items-center justify-end gap-4 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                    <a href="{{ route('listTugas') }}"
+                    <a href="{{ route('tugas.create') }}"
                         class="px-6 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-medium">
                         Batal
                     </a>
